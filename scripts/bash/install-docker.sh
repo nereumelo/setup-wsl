@@ -29,6 +29,6 @@ curl -L https://raw.githubusercontent.com/nereumelo/setup-wsl/main/props/docker 
 cat docker_props >> ~/.bashrc
 rm docker_props
 
-source ~/.bashrc
-
 sudo service docker start
+
+docker ps 2> /dev/null && echo '\n\033[0;32mDocker ready to use\033[0m' || echo '\n\033[1;33mYou should reboot\033[0m'
