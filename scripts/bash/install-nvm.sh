@@ -1,10 +1,5 @@
 cd
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-curl -L https://raw.githubusercontent.com/nereumelo/setup-wsl/main/props/nvm -o nvm_props
-cat nvm_props >> ~/.bashrc
-rm nvm_props
 
-source ~/.bashrc
-
-nvm -v
+nvm -v 2> /dev/null && echo '\n\033[0;32mNVM ready to use\033[0m' || echo '\n\033[1;33mYou should reboot\033[0m'
