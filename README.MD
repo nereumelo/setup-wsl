@@ -63,14 +63,14 @@
    4.2. Instalar o Docker Engine
 
    ```bash
-   sh -c "$(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-docker.sh)"
+   source /dev/stdin <<< "$(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-docker.sh)"
    ```
 
    <br>
    4.3. (Opcional) Instalar o Node Version Manager (NVM)
 
    ```bash
-   sh -c "$(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-nvm.sh)"
+   source /dev/stdin <<< "$(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-nvm.sh)"
    ```
 
    <br>
