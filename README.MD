@@ -43,12 +43,24 @@
 
    <br>
 
-4. Atualizar a distribuição
+4. Configurar a distribuição instalada
 
-   4.1. Executar o comando abaixo no terminal da distribuição instalada
+   4.1. Configuração automática
 
    ```bash
-   sudo sh -c 'apt-get -y update && apt-get -y upgrade && apt-get -y dist-upgrade && apt-get -y autoremove && apt-get -y autoclean && if [ -f /var/run/reboot-required ]; then echo; echo "\033[1;33mYou should reboot\033[0m"; fi'
+   source <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/install.sh)
+   ```
+
+   > **Nota:** Caso deseje configurar manualmente, consulte a sessão de [Configuração manual](https://github.com/nereumelo/setup-wsl#configura%C3%A7%C3%A3o-manual)
+
+   <br>
+
+## Configuração manual
+
+1. Atualizar a distribuição e seus pacotes
+
+   ```bash
+   source <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/setup.sh)
    ```
 
    <br>
@@ -60,22 +72,32 @@
    ```
 
    <br>
-   4.2. Instalar o Docker Engine
+
+2. Instalar o Git
 
    ```bash
-   source /dev/stdin <<< "$(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-docker.sh)"
-   ```
-
-   <br>
-   4.3. (Opcional) Instalar o Node Version Manager (NVM)
-
-   ```bash
-   source /dev/stdin <<< "$(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-nvm.sh)"
+   source <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-git.sh)
    ```
 
    <br>
 
-# Troubleshooting
+3. Instalar o Docker Engine
+
+   ```bash
+   source <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-docker.sh)
+   ```
+
+   <br>
+
+4. Instalar o Node Version Manager (NVM)
+
+   ```bash
+   source <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-nvm.sh)
+   ```
+
+   <br>
+
+## Troubleshooting
 
 ### Caso encontre problemas para executar a versão 2 do WSL
 

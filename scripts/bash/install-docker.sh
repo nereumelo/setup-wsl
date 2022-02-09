@@ -1,7 +1,6 @@
-cd
 
-sudo apt update && sudo apt upgrade -y
-sudo apt remove docker docker-engine docker.io containerd runc -y
+sudo apt-get update && sudo apt-get upgrade -y
+sudo apt-get remove docker docker-engine docker.io containerd runc -y
 sudo apt-get install -y \
     apt-transport-https \
     ca-certificates \
@@ -25,13 +24,9 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 sudo sh -c "echo '$USER ALL=(ALL) NOPASSWD: /usr/bin/dockerd' >> /etc/sudoers"
 
-curl -L https://raw.githubusercontent.com/nereumelo/setup-wsl/main/props/docker -o docker_props
-cat docker_props >> ~/.bashrc
-rm docker_props
+echo "$(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/props/docker)" >> ~/.bashrc
+source ~/.bashrc
 
 sudo service docker start
 
-source ~/.bashrc
-
-# Checking if NVM is ready to use
 [[ -n $(docker ps) ]] 2> /dev/null && echo -e '\n\033[0;32mDocker ready to use\033[0m' || echo -e '\n\033[1;33mYou should reboot\033[0m'
