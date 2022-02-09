@@ -1,13 +1,22 @@
 
 makeDecision () {
   while true; do
-      read -p "$1" yn
-      case $yn in
-          [Yy]* ) $2; break;;
-          [Nn]* ) break;;
-      esac
-    done
+    read -p "$1" yn
+    case $yn in
+        [Yy]* ) 
+          if [[ -n "$3" ]]
+            then 
+              source <($2)
+            else
+              $2
+          fi
+          break;;
+        [Nn]* ) 
+          break;;
+    esac
+  done
 }
+
 
 echo -e "\n>>> Initial setup"
 source <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/setup.sh)
@@ -18,15 +27,15 @@ makeDecision "Do you wish to set $application as your default text editor? [Y/n]
 
 application=git
 echo -e "\n>>> $application"
-makeDecision "Do you wish to setup $application? [Y/n] " "source <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-$application.sh)"
+makeDecision "Do you wish to setup $application? [Y/n] " "curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-$application.sh" "source"
 
 application=docker
 echo -e "\n>>> $application"
-makeDecision "Do you wish to setup $application? [Y/n] " "source <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-$application.sh)"
+makeDecision "Do you wish to setup $application? [Y/n] " "curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-$application.sh" "source"
 
 application=nvm
 echo -e "\n>>> $application"
-makeDecision "Do you wish to setup $application? [Y/n] " "source <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-$application.sh)"
+makeDecision "Do you wish to setup $application? [Y/n] " "curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-$application.sh" "source"
 
 if [ -f /var/run/reboot-required ]; 
   then
