@@ -97,6 +97,14 @@
 
    <br>
 
+5. Instalar o terminal ZSH
+
+   ```bash
+   source <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/zsh/install-zsh.sh)
+   ```
+
+   <br>
+
 ## Troubleshooting
 
 ### Caso encontre problemas para executar a versão 2 do WSL

@@ -37,6 +37,10 @@ application=nvm
 echo -e "\n>>> $application"
 makeDecision "Do you wish to setup $application? [Y/n] " "curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-$application.sh" "source"
 
+application=zsh
+echo -e "\n>>> $application"
+makeDecision "Do you wish to setup $application? [Y/n] " "curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/zsh/install-$application.sh" "source"
+
 if [ -f /var/run/reboot-required ]; 
   then
     echo -e "\n\033[1;33mYou should reboot\033[0m"
