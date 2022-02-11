@@ -12,4 +12,4 @@ echo "
 alias start=explorer.exe
 alias cdw='cd $WIN_HOME'" >> ~/.zshrc
 
-zsh /mnt/c/Users/nereu.oliveira.melo/Desktop/projetos/setup-wsl/scripts/zsh/setup-zsh.sh 
+source <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/zsh/setup-zsh.sh)
