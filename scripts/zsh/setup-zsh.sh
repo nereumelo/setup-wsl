@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 
 # Installing spaceship theme
-ZSH_THEMES_PATH="/home/nereu/.oh-my-zsh/themes"
+ZSH_THEMES_PATH="/home/$USER/.oh-my-zsh/themes"
 sudo git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_THEMES_PATH/spaceship-prompt"
 sudo ln -s "$ZSH_THEMES_PATH/spaceship-prompt/spaceship.zsh-theme" "$ZSH_THEMES_PATH/spaceship.zsh-theme"
 
