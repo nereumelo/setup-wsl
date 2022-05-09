@@ -10,7 +10,7 @@ echo "$(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/pr
 source ~/.zshrc
 
 # Installing zinit plugin
-printf 'y\n' | sh -c "$(curl -fsSL https://git.io/zinit-install)"
+printf 'y\n' | bash -c "$(curl -fsSL https://git.io/zinit-install)"
 echo "$(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/props/zinit)" >> ~/.zshrc
 source ~/.zshrc
 
