@@ -1,5 +1,5 @@
 
-sudo add-apt-repository ppa:git-core/ppa
+echo | sudo add-apt-repository ppa:git-core/ppa
 
 sudo apt-get -y update
 sudo apt-get -y upgrade
