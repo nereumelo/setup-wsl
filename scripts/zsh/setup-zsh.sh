@@ -6,8 +6,8 @@ sudo git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_THEMES_
 sudo ln -s "$ZSH_THEMES_PATH/spaceship-prompt/spaceship.zsh-theme" "$ZSH_THEMES_PATH/spaceship.zsh-theme"
 
 sed -i 's/ZSH_THEME=.*/ZSH_THEME=spaceship/' ~/.zshrc
-echo "$(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/props/zshrc_spaceship)" >> ~/.zshrc
-source ~/.zshrc
+echo "$(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/props/zshrc_spaceship)" > ~/.spaceshiprc.zsh
+source ~/.spaceshiprc.zsh
 
 # Installing zinit plugin
 printf 'y\n' | bash -c "$(curl -fsSL https://git.io/zinit-install)"
