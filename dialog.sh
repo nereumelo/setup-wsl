@@ -25,22 +25,22 @@ install_vim() {
 
 install_git() {
   print "Installing GIT..." "green"
-  curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-git.sh | bash
+  bash <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-git.sh)
 }
 
 install_nvm() {
   print "Installing NVM..." "yellow"
-  curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-nvm.sh | bash
+  bash <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-nvm.sh)
 }
 
 install_docker() {
   print "Installing Docker..." "blue"
-  curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-docker.sh | bash
+  bash <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-docker.sh)
 }
 
 install_zsh() {
   print "Installing ZSH..." "pink"
-  curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-zsh.sh | bash
+  bash <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-zsh.sh)
 }
 
 show_installation_dialog() {
@@ -72,11 +72,9 @@ show_installation_dialog() {
 
 setup() {
   print "Initial setup..."
-  curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/setup.sh | bash
+  bash <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/setup.sh)
   sudo apt-get install dialog
 }
 
 setup
-print "FIM DO SETUP" "red"
 show_installation_dialog
-print "FIM DA INSTALACAO" "red"
