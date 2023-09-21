@@ -48,7 +48,7 @@
    4.1. Configuração automática
 
    ```bash
-   source <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/install.sh)
+   bash <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/dialog.sh)
    ```
 
    > **Nota:** Caso deseje configurar manualmente, consulte a sessão de [Configuração manual](https://github.com/nereumelo/setup-wsl#configura%C3%A7%C3%A3o-manual)
