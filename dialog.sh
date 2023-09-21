@@ -40,7 +40,7 @@ install_docker() {
 
 install_zsh() {
   print "Installing ZSH..." "pink"
-  bash <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-zsh.sh)
+  bash <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/zsh/install-zsh.sh)
 }
 
 show_installation_dialog() {
