@@ -11,6 +11,38 @@ colors["blue"]="\x1b[34m"
 colors["pink"]="\x1b[35m"
 colors["reset"]="\x1b[0m" # Reset text color
 
+print() {
+  local sentence="$1"
+  local color="${colors["${2:-reset}"]}"
+  local reset="${colors["reset"]}"
+  echo -e "$color$sentence$reset"
+}
+
+install_vim() {
+  print "Installing VIM..." "red"
+  sudo update-alternatives --set editor /usr/bin/vim.basic
+}
+
+install_git() {
+  print "Installing GIT..." "green"
+  curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-git.sh | bash
+}
+
+install_nvm() {
+  print "Installing NVM..." "yellow"
+  curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-nvm.sh | bash
+}
+
+install_docker() {
+  print "Installing Docker..." "blue"
+  curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-docker.sh | bash
+}
+
+install_zsh() {
+  print "Installing ZSH..." "pink"
+  curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-zsh.sh | bash
+}
+
 show_installation_dialog() {
   # Create a checklist using dialog
   local choices=$(dialog --stdout --title "Checklist" \
@@ -38,31 +70,10 @@ show_installation_dialog() {
   fi
 }
 
-print() {
-  local sentence="$1"
-  local color="${colors["${2:-reset}"]}"
-  local reset="${colors["reset"]}"
-  echo -e "$color$sentence$reset"
+setup() {
+  print "Initial setup..."
+  source <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/setup.sh)
 }
 
-install_vim() {
-  print "Installing VIM..." "red"
-}
-
-install_git() {
-  print "Installing GIT..." "green"
-}
-
-install_nvm() {
-  print "Installing NVM..." "yellow"
-}
-
-install_docker() {
-  print "Installing Docker..." "blue"
-}
-
-install_zsh() {
-  print "Installing ZSH..." "pink"
-}
-
+setup
 show_installation_dialog
