@@ -76,4 +76,6 @@ setup() {
 }
 
 setup
+print "FIM DO SETUP" "red"
 show_installation_dialog
+print "FIM DA INSTALACAO" "red"
