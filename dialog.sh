@@ -72,7 +72,7 @@ show_installation_dialog() {
 
 setup() {
   print "Initial setup..."
-  bash <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/setup.sh)
+  bash <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/setup.sh)
   sudo apt-get install dialog
 }
 
