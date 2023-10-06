@@ -57,7 +57,6 @@ show_installation_dialog() {
   # Check the exit status to determine user input
   clear
   if [ ${#choices} -gt 0 ]; then
-    setup
     for choice in $choices; do
       case $choice in
         "VIM") install_vim;;
@@ -76,4 +75,5 @@ setup() {
   sudo apt-get install dialog
 }
 
+setup
 show_installation_dialog
