@@ -43,6 +43,11 @@ install_zsh() {
   bash <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/zsh/install-zsh.sh)
 }
 
+install_dotnet() {
+  print "Installing .NET..." "green"
+  bash <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-dotnet.sh)
+}
+
 show_installation_dialog() {
   # Create a checklist using dialog
   local choices=$(dialog --stdout --title "Checklist" \
@@ -51,6 +56,7 @@ show_installation_dialog() {
       "VIM" "Default editor" "OFF" \
       "GIT" "Source version control" "OFF" \
       "NVM" "Node version control" "OFF" \
+      ".NET" "C# Framework" "OFF" \
       "DOCKER" "Container management" "OFF" \
       "ZSH" "Improved shell" "OFF")
 
@@ -62,6 +68,7 @@ show_installation_dialog() {
         "VIM") install_vim;;
         "GIT") install_git;;
         "NVM") install_nvm;;
+        ".NET") install_dotnet;;
         "DOCKER") install_docker;;
         "ZSH") install_zsh;;
       esac
