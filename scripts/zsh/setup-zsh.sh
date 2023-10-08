@@ -25,3 +25,9 @@ if [ -n $(nvm -v) ];
     echo "$(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/props/nvm)" >> ~/.zshrc
     source ~/.zshrc
 fi
+
+if [ -n $(dotnet -v) ]; 
+  then
+    echo "$(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/props/dotnet)" >> ~/.zshrc
+    source ~/.zshrc
+fi
