@@ -1,41 +1,40 @@
 # Setup WSL
 
-1. Instalar a versão atual do terminal [PowerShell](https://github.com/PowerShell/PowerShell/#get-powershell)
-2. Abrir o PowerShell como administrador
+1. Open PowerShell as an administrator
 
-3. Instalar o WSL
+2. Install WSL
 
    ```bash
    wsl --install
    ```
 
-   > **Nota:** Caso encontre problemas para executar o WSL2, consulte a sessão de [troubleshooting](https://github.com/nereumelo/setup-wsl#troubleshooting)
+   > If you encounter issues running WSL2, refer to the [troubleshooting](https://github.com/nereumelo/setup-wsl#troubleshooting) section.
 
    <br>
-   3.1. Listar as distribuições Linux instaladas
+   2.1. List the installed Linux distributions
 
    ```bash
    wsl -l -v
    ```
 
-   > **Nota:** Também são listados a versão do WSL e o status de execução de cada distribuição
+   > The WSL version and the running status of each distribution are also listed
 
    <br>
-   3.2. Listar as distribuições Linux disponíveis para instalação
+   2.2. List the available Linux distributions for installation
 
    ```bash
    wsl -l -o
    ```
 
    <br>
-   3.3. Instalar uma distribuição
+   2.3. Install a distribution
 
    ```bash
    wsl --install -d <DISTRO-NAME>
    ```
 
    <br>
-   3.4. Executar uma distribuição instalada
+   2.4. Run the installed distribution
 
    ```bash
    wsl -d <DISTRO-NAME>
@@ -43,75 +42,20 @@
 
    <br>
 
-4. Configurar a distribuição instalada
-
-   4.1. Configuração automática
+3. Configure the installed distribution
 
    ```bash
-   bash <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/dialog.sh)
+   bash <(curl -sL https://github.com/nereumelo/setup-wsl/raw/refs/heads/develop/install.sh)
    ```
-
-   > **Nota:** Caso deseje configurar manualmente, consulte a sessão de [Configuração manual](https://github.com/nereumelo/setup-wsl#configura%C3%A7%C3%A3o-manual)
-
-   <br>
-
-## Configuração manual
-
-1. Atualizar a distribuição e seus pacotes
-
-   ```bash
-   source <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/setup.sh)
-   ```
-
-   <br>
-
-   > **Nota:** Caso apareça a mensagem **'You should reboot'**, abra o terminal PowerShell e desligue as distribuições em execução. Após isso, basta abrir novamente o terminal da distribuição e prosseguir com o setup.
-
-   ```bash
-   wsl --shutdown
-   ```
-
-   <br>
-
-2. Instalar o Git
-
-   ```bash
-   source <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-git.sh)
-   ```
-
-   <br>
-
-3. Instalar o Docker Engine
-
-   ```bash
-   source <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-docker.sh)
-   ```
-
-   <br>
-
-4. Instalar o Node Version Manager (NVM)
-
-   ```bash
-   source <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/bash/install-nvm.sh)
-   ```
-
-   <br>
-
-5. Instalar o terminal ZSH
-
-   ```bash
-   source <(curl -fsSL https://raw.githubusercontent.com/nereumelo/setup-wsl/main/scripts/zsh/install-zsh.sh)
-   ```
-
-   <br>
 
 ## Troubleshooting
 
-### Caso encontre problemas para executar a versão 2 do WSL
+### If you encounter issues running WSL version 2
 
-- Baixar o [pacote de atualização do kernel Linux para o WSL](https://docs.microsoft.com/pt-br/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package)
+- Download the [Linux kernel update package for WSL](https://learn.microsoft.com/en-us/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package)
 
-- Definir o WSL 2 como a sua versão padrão
+- Set WSL 2 as your default version
+
   ```bash
   wsl --set-default-version 2
   ```
