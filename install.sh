@@ -11,8 +11,6 @@ INSTALL_ZSH=true
 INSTALL_NVM=true
 INSTALL_DOCKER=true
 INSTALL_GOLANG=true
-GO_VERSION="1.21.1"
-DOCKER_SLEEP_TIME=3
 
 # Trap function to catch errors
 error_exit() {
@@ -194,7 +192,7 @@ install_docker() {
 
         # Use official Docker installation script
         curl -fsSL https://get.docker.com -o get-docker.sh
-        sed -i.bak "s/\(set -x; sleep \)20/\1${DOCKER_SLEEP_TIME:-20}/" get-docker.sh
+        sed -i 's/icrosoft\* ) true/icrosoft* ) false/g' get-docker.sh
         sudo sh get-docker.sh
 
         # Add the current user to the docker group
