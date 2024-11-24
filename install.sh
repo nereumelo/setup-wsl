@@ -10,6 +10,8 @@ LOG_FILE="$HOME/wsl_setup.log"
 INSTALL_ZSH=true
 INSTALL_NVM=true
 INSTALL_DOCKER=true
+INSTALL_GOLANG=true
+GO_VERSION="1.21.1"
 DOCKER_SLEEP_TIME=3
 
 # Trap function to catch errors
@@ -32,14 +34,20 @@ update_system() {
 
 install_basic_packages() {
     echo "Installing basic packages..."
-    sudo apt-get install -qy build-essential curl wget git zip unzip software-properties-common ca-certificates gnupg lsb-release
+    sudo apt-get install -qy build-essential curl wget git zip unzip bat software-properties-common ca-certificates gnupg lsb-release
+
+    if command -v batcat &>/dev/null; then
+        mkdir -p ~/.local/bin
+        ln -s /usr/bin/batcat ~/.local/bin/bat
+    fi
 }
 
 prompt_user() {
     echo "This script will perform the following installations:"
     echo "1. Zsh and Oh-My-Zsh"
     echo "2. NVM and Node.js"
-    echo "3. Docker"
+    echo "3. Golang"
+    echo "4. Docker"
     read -p "Do you want to proceed with all installations? (y/n): " proceed
     if [[ "$proceed" != "y" && "$proceed" != "Y" ]]; then
         read -p "Install Zsh and Oh-My-Zsh? (y/n): " zsh_choice
@@ -48,8 +56,13 @@ prompt_user() {
         read -p "Install NVM and Node.js? (y/n): " nvm_choice
         INSTALL_NVM=$( [[ "$nvm_choice" == "y" || "$nvm_choice" == "Y" ]] && echo true || echo false )
 
+        read -p "Install Golang? (y/n): " golang_choice
+        INSTALL_GOLANG=$( [[ "$golang_choice" == "y" || "$golang_choice" == "Y" ]] && echo true || echo false )
+
         read -p "Install Docker? (y/n): " docker_choice
         INSTALL_DOCKER=$( [[ "$docker_choice" == "y" || "$docker_choice" == "Y" ]] && echo true || echo false )
+
+
     fi
 }
 
@@ -80,7 +93,17 @@ install_oh_my_zsh() {
 configure_zsh() {
     if $INSTALL_ZSH; then
         echo "Configuring Zsh..."
+
+        # Set ZSH as the default shell
+        echo "Changing default shell to Zsh..."
+        if [ "$SHELL" != "$(which zsh)" ]; then
+            chsh -s "$(which zsh)"
+        else
+            echo "Default shell is already Zsh."
+        fi
+
         # Install Powerlevel10k theme
+        echo "Configuring Zsh theme..."
         if [ ! -d "${OH_MY_ZSH_CUSTOM}/themes/powerlevel10k" ]; then
             git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${OH_MY_ZSH_CUSTOM}/themes/powerlevel10k"
         fi
@@ -88,6 +111,7 @@ configure_zsh() {
         # Set ZSH_THEME to "powerlevel10k/powerlevel10k" in .zshrc
         sed -i 's/^ZSH_THEME=".*"/ZSH_THEME="powerlevel10k\/powerlevel10k"/' "$HOME/.zshrc"
 
+        echo "Configuring Zsh plugins..."
         # Install plugins
         [ ! -d "${OH_MY_ZSH_CUSTOM}/plugins/zsh-autosuggestions" ] && \
             git clone https://github.com/zsh-users/zsh-autosuggestions "${OH_MY_ZSH_CUSTOM}/plugins/zsh-autosuggestions"
@@ -103,6 +127,7 @@ configure_zsh() {
 
         # Enable plugins in .zshrc
         sed -i 's/^plugins=(.*)/plugins=(sudo git nvm z k node zsh-bat colored-man-pages zsh-autosuggestions zsh-syntax-highlighting)/' "$HOME/.zshrc"
+        echo 'export PATH="$PATH:$HOME/.local/bin"' >> ~/.zshrc
     fi
 }
 
@@ -121,6 +146,43 @@ install_nvm() {
         nvm install --lts
     else
         echo "Skipping NVM installation."
+    fi
+}
+
+install_golang() {
+    if [ "$INSTALL_GOLANG" = true ]; then
+        if command -v go &>/dev/null; then
+            echo "Golang is already installed."
+        else
+            echo "Installing Golang..."
+
+            # Remove any existing Go installation
+            sudo rm -rf /usr/local/go* && sudo rm -rf /usr/local/go
+
+            # Update package list
+            echo "Updating package list..."
+            sudo apt-get update
+
+            # Install golang-go package
+            echo "Installing golang-go package..."
+            sudo apt-get install -y golang-go
+
+            # Verify installation
+            if command -v go &>/dev/null; then
+                echo "Golang installed successfully."
+                # Optionally, set up Go environment variables
+                echo "Setting up Go environment variables..."
+                echo "export PATH=\$PATH:/usr/local/go/bin" >> ~/.profile
+                echo "export GOPATH=\$HOME/go" >> ~/.profile
+                echo "export PATH=\$PATH:\$GOPATH/bin" >> ~/.profile
+                source ~/.profile
+            else
+                echo "Golang installation failed."
+                exit 1
+            fi
+        fi
+    else
+        echo "Skipping Golang installation."
     fi
 }
 
@@ -150,20 +212,9 @@ install_docker() {
 enable_systemd_in_wsl() {
     echo "Enabling systemd in WSL..."
     sudo bash -c 'cat <<EOF > /etc/wsl.conf
-        [boot]
-        systemd=true
-        EOF'
-}
-
-change_default_shell_to_zsh() {
-    if $INSTALL_ZSH; then
-        echo "Changing default shell to Zsh..."
-        if [ "$SHELL" != "$(which zsh)" ]; then
-            chsh -s "$(which zsh)"
-        else
-            echo "Default shell is already Zsh."
-        fi
-    fi
+[boot]
+systemd=true
+EOF'
 }
 
 main() {
@@ -174,9 +225,9 @@ main() {
     install_oh_my_zsh
     configure_zsh
     install_nvm
+    install_golang
     install_docker
     enable_systemd_in_wsl
-    change_default_shell_to_zsh
 
     echo "Installation complete."
     echo "Please restart WSL by running 'wsl --shutdown' in Windows Command Prompt or PowerShell, then restart your WSL terminal."
