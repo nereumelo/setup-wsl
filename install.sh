@@ -104,6 +104,8 @@ configure_zsh() {
         echo "Configuring Zsh theme..."
         if [ ! -d "${OH_MY_ZSH_CUSTOM}/themes/powerlevel10k" ]; then
             git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${OH_MY_ZSH_CUSTOM}/themes/powerlevel10k"
+            curl -LO https://github.com/nereumelo/setup-wsl/raw/refs/heads/develop/.p10k.zsh
+            echo '# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.' >> ~/.zshrc && echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> ~/.zshrc
         fi
 
         # Set ZSH_THEME to "powerlevel10k/powerlevel10k" in .zshrc
