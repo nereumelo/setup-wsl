@@ -128,7 +128,7 @@ configure_zsh() {
         # Enable plugins in .zshrc
         sed -i 's/^plugins=(.*)/plugins=(sudo git nvm z k node zsh-bat colored-man-pages zsh-autosuggestions zsh-syntax-highlighting)/' "$HOME/.zshrc"
         echo 'export PATH="$PATH:$HOME/.local/bin"' >> ~/.zshrc
-        echo '# Start the ssh agent' >> ~/.zshrc && echo 'eval $(ssh-agent)' >> ~/.zshrc
+        echo '# Start the ssh agent' >> ~/.zshrc && echo 'eval $(ssh-agent > /dev/null)' >> ~/.zshrc
 
     fi
 }
