@@ -146,7 +146,6 @@ install_nvm() {
         export NVM_DIR="$HOME/.nvm"
         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
-        echo -e "ntl\nexpose-wsl\nyarn\nfkill-cli" > "${NVM_DIR:-$HOME/.nvm}/default-packages"
         nvm install --lts
     else
         echo "Skipping NVM installation."
